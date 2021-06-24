@@ -1,5 +1,6 @@
 barb_popup:
   card:
+    type: "custom:mod-card"
     style: |
       ha-card {
         padding: 7px;
