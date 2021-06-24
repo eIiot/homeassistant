@@ -1,0 +1,590 @@
+lovelace:
+  card:
+    type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: welcome_text
+      - type: horizontal-stack
+        square: false
+        cards:
+          - type: "custom:button-card"
+            entity: sensor.number_of_persons_home
+            icon: mdi:account-supervisor-circle
+            name: |
+              [[[ 
+              if (entity.state == '0')
+                return 'Zero';
+              if (entity.state == '1')
+                return 'One';
+              if (entity.state == '2')
+                return 'Two';
+              if (entity.state == '3')
+                return 'Three';
+              if (entity.state == '4')
+                return 'Four';
+              else
+                return '>4?';
+              ]]]
+            template:
+              - icon_only
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  [[[ 
+                  if (entity.state == '0')
+                    return 'No One is Home';
+                  if (entity.state == '1')
+                    return 'One Person is Home';
+                  if (entity.state == '2')
+                    return 'Two People are Home';
+                  if (entity.state == '3')
+                    return 'Three People are Home';
+                  if (entity.state == '4')
+                    return 'Four People are Home';
+                  ]]]
+                card:
+                  type: "custom:mod-card"
+                  style: |
+                    ha-card {
+                      padding: 7px;
+                    }
+                  card:
+                    type: grid
+                    columns: 2
+                    cards:
+                      - type: custom:decluttering-card
+                        template: person_eliot
+                      - type: custom:decluttering-card
+                        template: person_zoe
+                      - type: custom:decluttering-card
+                        template: person_tom
+                      - type: custom:decluttering-card
+                        template: person_holly
+          - type: "custom:button-card"
+            entity: sensor.number_of_sensors_active
+            icon: |
+              [[[
+                return entity.state > '0' ? 'mdi:motion-sensor' : 'mdi:motion-sensor-off'; 
+              ]]]
+            name: |
+              [[[ 
+              if (entity.state == '0')
+                return 'Clear';
+              if (entity.state == '1')
+                return 'One';
+              if (entity.state == '2')
+                return 'Two';
+              if (entity.state == '3')
+                return 'Three';
+              if (entity.state == '4')
+                return 'Four';                
+              ]]]
+            template:
+              - icon_only
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  Sensors
+                card:
+                  type: "custom:mod-card"
+                  style: |
+                    ha-card {
+                      padding: 7px;
+                    }
+                  card:
+                    type: grid
+                    columns: 2
+                    cards:
+                      - type: custom:decluttering-card
+                        template: motion_basement
+                      - type: custom:decluttering-card
+                        template: motion_basement_door                        
+                      - type: custom:decluttering-card
+                        template: motion_deck
+                      - type: custom:decluttering-card
+                        template: motion_driveway     
+                      - type: custom:decluttering-card
+                        template: motion_below_deck
+          - type: "custom:button-card"
+            entity: sensor.number_of_doors_open
+            icon: |
+              [[[
+                return entity.state > '0' ? 'mdi:door-open' : 'mdi:door'; 
+              ]]]
+            name: |
+              [[[ 
+              if (entity.state == '0')
+                return 'Zero';
+              if (entity.state == '1')
+                return 'One';
+              if (entity.state == '2')
+                return 'Two';
+              if (entity.state == '3')
+                return 'Three';
+              ]]]
+            template:
+              - icon_only
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  Doors
+                card:
+                  type: "custom:mod-card"
+                  style: |
+                    ha-card {
+                      padding: 7px;
+                    }
+                  card:
+                    type: grid
+                    columns: 2
+                    cards:
+                      - type: custom:decluttering-card
+                        template: door_basement             
+          - type: "custom:button-card"
+            entity: alarm_control_panel.alarmo
+            name: |
+              [[[ 
+              if (entity.state == 'disarmed')
+                return 'Off';
+              if (entity.state == 'armed_home')
+                return 'Home';
+              if (entity.state == 'armed_away')
+                return 'Away';
+              if (entity.state == 'armed_night')
+                return 'Night';
+              if (entity.state == 'pending')
+                return 'Pend';      
+              if (entity.state == 'arming')
+                return 'Arming';                   
+              if (entity.state == 'triggered')
+                return 'Siren';                        
+              ]]]            
+            icon: |
+              [[[ 
+              if (entity.state == 'disarmed')
+                return 'mdi:shield-off';
+              if (entity.state == 'armed_home')
+                return 'mdi:shield-home';
+              if (entity.state == 'armed_away')
+                return 'mdi:shield-alert';
+              if (entity.state == 'armed_night')
+                return 'mdi:shield-star';
+              if (entity.state == 'pending')
+                return 'mdi:shield-half-full';    
+              if (entity.state == 'arming')
+                return 'mdi:shield-sync';                    
+              if (entity.state == 'triggered')
+                return 'mdi:alarm-light';                        
+              ]]]
+            template:
+              - icon_only
+            tap_action:
+              action: more-info                                                                
+      - type: horizontal-stack
+        square: false
+        cards:                    
+          - type: "custom:button-card"
+            entity: sensor.living_room_temperature
+            icon: mdi:thermometer
+            name: |
+              [[[ 
+              var temp = entity.state
+              return temp + 'F'
+              ]]]
+            template:
+              - icon_only
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  Temperature
+                card:
+                  type: "custom:mod-card"
+                  style: |
+                    ha-card {
+                      padding: 7px;
+                    }
+                  card:
+                    type: grid
+                    columns: 2
+                    cards:
+                      - type: "custom:button-card"
+                        entity: sensor.living_room_temperature
+                        name: Living Room
+                        style:
+                          top: 20.35%
+                          left: 80.05%
+                          width: 20%
+                        template:
+                          - temperature
+                          - icon_temperature
+                      - type: "custom:button-card"
+                        entity: sensor.bedroom_temperature
+                        name: Bedroom
+                        style:
+                          top: 20.35%
+                          left: 80.05%
+                          width: 20%
+                        template:
+                          - temperature
+                          - icon_temperature
+                      - type: "custom:button-card"
+                        entity: sensor.upstairs_temperature
+                        name: Upstairs
+                        style:
+                          top: 20.35%
+                          left: 80.05%
+                          width: 20%
+                        template:
+                          - temperature
+                          - icon_temperature
+                      - type: "custom:button-card"
+                        entity: sensor.basement_temperature
+                        name: Basement
+                        style:
+                          top: 20.35%
+                          left: 80.05%
+                          width: 20%
+                        template:
+                          - temperature
+                          - icon_temperature
+                      - type: "custom:button-card"
+                        entity: sensor.outdoor_temperature
+                        name: Outside
+                        style:
+                          top: 20.35%
+                          left: 80.05%
+                          width: 20%
+                        template:
+                          - temperature
+                          - icon_temperature          
+          - type: "custom:button-card"
+            entity: sensor.mail_usps_mail
+            icon: |
+              [[[
+                return entity.state > '0' ? 'mdi:mailbox-open' : 'mdi:mailbox-up'; 
+              ]]]
+            name: |
+              [[[ 
+              if (entity.state == '0')
+                return 'None';
+              if (entity.state == '1')
+                return 'One';
+              if (entity.state == '2')
+                return 'Two';
+              if (entity.state == '3')
+                return 'Three';
+              if (entity.state == '4')
+                return 'Four';
+              if (entity.state == '5')
+                return 'Five';
+              if (entity.state == '6')
+                return 'Six';
+              if (entity.state == '7')
+                return 'Seven';
+              if (entity.state == '8')
+                return 'Eight';                                                                
+              if (entity.state == '9')
+                return 'Nine';                
+              else
+                return '> Nine';
+              ]]]
+            template:
+              - icon_only
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  [[[
+                    var mail = entity.state;
+                    return mail + ' Pieces of Mail Today!';
+                  ]]]
+                card:
+                  type: custom:decluttering-card
+                  template: mail_popup        
+          - type: "custom:button-card"
+            entity: sun.sun
+            icon: |
+              [[[
+                return entity.state === 'above_horizon' ? 'mdi:white-balance-sunny' : 'mdi:weather-night'; 
+              ]]]
+            name: |
+              Scenes
+            template:
+              - icon_only
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  Scenes
+                card:
+                  type: "custom:decluttering-card"
+                  template: scenes_popup                             
+        #  - type: "custom:button-card"
+        #    entity: person.barb
+        #    icon: mdi:home
+        #    name: Barb
+        #    template:
+        #      - icon_only
+        #    tap_action:
+        #      action: fire-dom-event
+        #      browser_mod:
+        #        command: popup
+        #        title: |
+        #          Barb's House
+        #        card:
+        #          type: "custom:decluttering-card"
+        #          template: barb_popup           
+      - type: markdown
+        content: Downstairs Bedroom
+        style: |
+          ha-card {
+            background-color: transparent;
+            font-size: 20px;
+            font-family: SF Display;
+            box-shadow: none;
+            margin-left: -10px;
+            margin-bottom: -20px;
+          }
+      - type: grid
+        columns: "[[collumns]]"
+        cards:
+          - type: "custom:button-card"
+            entity: light.bedroom_led_strip
+            name: Bed LEDs
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - light_color
+              - icon_lamp
+          - type: "custom:button-card"
+            entity: switch.bedroom_lamps
+            name: Lamps
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_lamp
+          - type: "custom:button-card"
+            entity: light.bedside_lamp_msl100r_main_channel
+            name: Zoe's Light
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - light
+              - icon_lamp
+          - type: "custom:button-card"
+            entity: switch.eliot_bedside_lamp
+            name: Eliot's Light
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - light
+              - icon_lamp              
+      - type: grid
+        columns: "[[collumns]]"
+        cards:              
+          - type: custom:button-card
+            entity: group.bedroom_fans
+            name: Fans
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_fan
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: |
+                  Temperature
+                card:
+                  type: "custom:decluttering-card"
+                  template: fans_popup
+          - type: "custom:button-card"
+            entity: switch.zoe_s_desk_lamp
+            name: Desk Lamp
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_lamp                  
+          - type: "custom:button-card"
+            entity: media_player.nest_hub
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - media
+              - icon_monitors                  
+      - type: markdown
+        content: Living Room
+        style: |
+          ha-card {
+            background-color: transparent;
+            font-size: 20px;
+            font-family: SF Display;
+            box-shadow: none;
+            margin-left: -10px;
+            margin-top: -15px;
+            margin-bottom: -20px;
+          }
+      - type: grid
+        columns: "[[collumns]]"
+        cards:
+          - type: "custom:button-card"
+            entity: switch.bookcase_lights
+            name: Bookcase
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_lamp
+          - type: "custom:button-card"
+            entity: switch.fireplace_lamp
+            name: Fireplace
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_lamp
+      - type: markdown
+        content: Kitchen
+        style: |
+          ha-card {
+            background-color: transparent;
+            font-size: 20px;
+            font-family: SF Display;
+            box-shadow: none;
+            margin-left: -10px;
+            margin-top: -15px;
+            margin-bottom: -20px;
+          }
+      - type: grid
+        columns: "[[collumns]]"
+        cards:
+          - type: "custom:button-card"
+            entity: switch.kettle
+            name: Kettle
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base_blank
+              - icon_kettle               
+   #   - type: markdown              
+   #     content: Upstairs
+   #     style: |
+   #       ha-card {
+   #         background-color: transparent;
+   #         font-size: 20px;
+   #         font-family: SF Display;
+   #         box-shadow: none;
+   #         margin-left: -10px;
+   #         margin-top: -15px;
+   #         margin-bottom: -20px;
+   #       }
+   #   - type: grid
+   #     columns: "[[collumns]]"
+   #     cards:
+   #       - type: "custom:button-card"
+   #         entity: sensor.hp_printer_status
+   #         name: Printer
+   #         style:
+   #           top: 20.35%
+   #           left: 80.05%
+   #           width: 20%
+   #         template:
+   #           - base
+   #           - icon_printer
+   #         tap_action:
+   #           action: fire-dom-event
+   #           browser_mod:
+   #             command: popup
+   #             title: Printer
+   #             card:
+   #               type: entities
+   #               entities:
+   #                 - type: custom:hui-element
+   #                   card_type: 'custom:bar-card'
+   #                   positions:
+   #                     value: 'off'
+   #                     name: 'off'  
+   #                   entities:
+   #                     - entity: sensor.hp_printer_toner_black   
+   #                     - entity: sensor.hp_printer_printer      
+   #                       limit_value: true                       
+   #                       min: 0
+   #                       max: 1000                                                                                                
+      - type: markdown
+        content: Basement/Outside
+        style: |
+          ha-card {
+            background-color: transparent;
+            font-size: 20px;
+            font-family: SF Display;
+            box-shadow: none;
+            margin-left: -10px;
+            margin-top: -15px;
+            margin-bottom: -20px;
+          }
+      - type: grid
+        columns: "[[collumns]]"
+        cards:
+          - type: "custom:button-card"
+            entity: light.basement
+            name: Basement
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - light_color
+              - icon_lamp
+          - type: "custom:button-card"
+            entity: switch.deck_lights
+            name: Deck
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_lamp
+          - type: "custom:button-card"
+            entity: switch.deck_cameras
+            name: Deck Cams
+            style:
+              top: 20.35%
+              left: 80.05%
+              width: 20%
+            template:
+              - base
+              - icon_spot         

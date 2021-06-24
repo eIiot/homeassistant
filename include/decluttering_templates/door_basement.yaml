@@ -1,0 +1,12 @@
+door_basement:
+  card:
+    type: 'custom:button-card'
+    entity: binary_sensor.basement_door
+    name: Basement Door
+    style:
+      top: 20.35%
+      left: 80.05%
+      width: 20%
+    template:
+      - base_blank
+      - icon_closet

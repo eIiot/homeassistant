@@ -1,0 +1,55 @@
+# Lights #
+
+light.eb7e9759c3aeb810650g7t:
+  supported_features: 191
+  type: light-rgb
+  friendly_name: Zoe's RGB Light
+  room: Downstairs Bedroom
+
+light.ebb7b9611fcfb6bd73ux5j:
+  supported_features: 191
+  type: light-rgb
+  friendly_name: Basement
+  room: Basement
+
+light.bedroom_led_strip:
+  type: light-rgb
+  friendly_name: Bedroom LED Strip
+  room: Downstairs Bedroom
+
+light.bedside_lamp_msl100r_main_channel:
+  type: light-standard
+  friendly_name: Zoe's Bedside Lamp
+  room: Downstairs Bedroom
+
+# Sensors #
+
+sensor.fr24_feeder:
+  hidden: true
+
+sensor.fr24_feeder_aircraft_tracked:
+  icon: mdi:airplane
+
+sensor.fr24_feeder_aircraft_uploaded:
+  icon: mdi:airplane
+
+sensor.fr24_feeder_radar_code:
+  icon: mdi:radar
+
+sensor.google_fit_steps:
+  friendly_name: Steps
+
+sensor.living_room_temperature:
+  humidity: sensor.living_room_humidity
+
+sensor.bedroom_temperature:
+  humidity: sensor.bedroom_humidity
+
+sensor.upstairs_temperature:
+  humidity: sensor.upstairs_humidity
+
+sensor.basement_temperature:
+  humidity: sensor.basement_humidity
+
+sensor.outdoor_temperature:
+  humidity: sensor.outdoor_humidity

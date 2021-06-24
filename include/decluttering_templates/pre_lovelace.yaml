@@ -1,0 +1,38 @@
+pre_lovelace:
+  card:
+    type: "custom:state-switch"
+    entity: mediaquery
+    states:
+      "(min-width: 1100px)":
+        type: "custom:mod-card"
+        style: |
+          ha-card {
+            padding: 7px;
+          }
+        card:
+          type: custom:decluttering-card
+          template: [[lovelace]]
+          variables:
+            - collumns: "8"
+      "(min-width: 600px)":
+        type: "custom:mod-card"
+        style: |
+          ha-card {
+            padding: 7px;
+          }
+        card:
+          type: custom:decluttering-card
+          template: [[lovelace]]
+          variables:
+            - collumns: "5"
+      all:
+        type: "custom:mod-card"
+        style: |
+          ha-card {
+            padding: 8px;
+          }
+        card:
+          type: custom:decluttering-card
+          template: [[lovelace]]
+          variables:
+            - collumns: "3"

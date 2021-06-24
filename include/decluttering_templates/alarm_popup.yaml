@@ -1,0 +1,71 @@
+alarm_popup:
+  card:
+    type: "custom:mod-card"
+    style: |
+      ha-card {
+        padding: 7px;
+      }
+    card:  
+      type: horizontal-stack
+      cards:
+        - type: custom:button-card
+          icon: mdi:shield-alert
+          name: Arm
+          template:
+            - icon_only
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_arm_away
+            service_data:
+              entity_id: alarm_control_panel.ha_alarm
+              code: '1407'
+        - type: custom:button-card
+          icon: mdi:shield-home
+          name: Home
+          template:
+            - icon_only
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_arm_home
+            service_data:
+              entity_id: alarm_control_panel.ha_alarm
+              code: '1407'          
+        - type: custom:button-card
+          icon: mdi:shield-star
+          name: Night
+          template:
+            - icon_only
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_arm_night
+            service_data:
+              entity_id: alarm_control_panel.ha_alarm
+              code: '1407'  
+        - type: custom:button-card
+          icon: mdi:shield-off
+          name: 'Off'
+          template:
+            - icon_only
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_disarm
+            service_data:
+              entity_id: alarm_control_panel.ha_alarm
+              code: '1407'         
+        - type: custom:button-card
+          icon: 'mdi:alarm-light'
+          name: Alarm
+          template:
+            - icon_only
+          lock:         
+            enabled: true
+            duration: 3
+            unlock: hold
+          styles:
+            icon:
+              [left: 8%, position: absolute]            
+          tap_action:
+            action: call-service
+            service: input_boolean.turn_on
+            service_data:
+              entity_id: input_boolean.alarm_trigger_now

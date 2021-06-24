@@ -1,0 +1,179 @@
+      processor_temperature_c:
+        friendly_name: "Processor Temperature Celsius"
+        unit_of_measurement: "C"
+        value_template: "{{ ((states('sensor.processor_temperature_f') | float - 32) * 5 / 9) | round(2) }}"
+      fr24_temperature_c:
+        friendly_name: "Tempature"
+        unit_of_measurement: "C"
+        value_template: "{{ ((states('sensor.fr24_temperature') | float - 32) * 5 / 9) | round(2) }}"
+      fr24_feeder_receiver_connected:
+        friendly_name: "Reciever"
+        value_template: >-
+          {% if is_state('binary_sensor.fr24_feeder_receiver_connected', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      fr24_feeder_link_connected:
+        friendly_name: "Link"
+        value_template: >-
+          {% if is_state('binary_sensor.fr24_feeder_link_connected', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      android_server_status:
+        friendly_name: "Android Server"
+        value_template: >-
+          {% if is_state('binary_sensor.android_server', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      pi24_server_status:
+        friendly_name: "Pi24"
+        value_template: >-
+          {% if is_state('binary_sensor.pi24', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      basement_esp32_status:
+        friendly_name: "Basement Esp32"
+        value_template: >-
+          {% if is_state('binary_sensor.basement_esp32_status_binary', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      living_room_esp32_status:
+        friendly_name: "Living Room Esp32"
+        value_template: >-
+          {% if is_state('binary_sensor.living_room_esp32_status_binary', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      bedroom_esp32_status:
+        friendly_name: "Bedroom Esp32"
+        value_template: >-
+          {% if is_state('binary_sensor.bedroom_esp32_status_binary', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      upstairs_esp32_status:
+        friendly_name: "Upstairs Esp32"
+        value_template: >-
+          {% if is_state('binary_sensor.upstairs_esp32_status_binary', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      backup_status:
+        friendly_name: "Backup Status"
+        value_template: >-
+          {% if is_state('binary_sensor.backup', 'on') %}
+            Backed Up
+          {% else %}
+            Error
+          {% endif %}          
+      eliot_processor_temperature_c:
+        friendly_name: "Processor Temperature Celsius"
+        unit_of_measurement: "C"
+        value_template: "{{ ((states('sensor.eliot_intel_core_i7_10750h_temperatures_cpu_package') | float - 32) * 5 / 9) | round(2) }}"
+      eliot_gpu_temperature_c:
+        friendly_name: "GPU Tempature Celcius"
+        unit_of_measurement: "C"
+        value_template: "{{ ((states('sensor.eliot_nvidia_geforce_rtx_2060_temperatures_gpu_core') | float - 32) * 5 / 9) | round(2) }}"
+      number_of_persons_home:
+        friendly_name: "People Home"
+        value_template: >
+          {{ expand(states.group.people)|selectattr('state','equalto','home')|list|length }}
+      number_of_sensors_active:
+        friendly_name: "People Home"
+        value_template: >
+          {{ expand(states.group.motion_sensors)|selectattr('state','equalto','on')|list|length }}
+      number_of_doors_open:
+        friendly_name: "Doors Open"
+        value_template: >
+          {{ expand(states.group.doors)|selectattr('state','equalto','on')|list|length }}          
+      fr24_feeder_radar_code:
+        friendly_name: Radar Code
+        value_template: '{{ states.sensor.fr24_feeder.attributes["feed_alias"] }}'
+      fr24_feeder_aircraft_tracked:
+        friendly_name: Aircraft Tracked
+        value_template: '{{ states.sensor.fr24_feeder.attributes["d11_map_size"] | round(0) }}'
+        unit_of_measurement: "aircrafts"
+      fr24_feeder_aircraft_uploaded:
+        friendly_name: Aircraft Uploaded
+        value_template: '{{ states.sensor.fr24_feeder.attributes["feed_num_ac_tracked"] | round(0) }}'
+        unit_of_measurement: "aircrafts"
+      fr24_feeder_version:
+        friendly_name: Version
+        value_template: '{{ states.sensor.fr24_feeder.attributes["build_version"] }}'
+      riley_goal_minutes:
+        friendly_name: "Activity Goal"
+        icon_template: mdi:trophy-outline
+        value_template: '{{ state_attr("device_tracker.whistle_riley", "activity_goal") }}'
+        unit_of_measurement: "minutes"
+      riley_goal_streak:
+        friendly_name: "Activity Streak"
+        icon_template: mdi:chart-timeline
+        value_template: '{{ state_attr("device_tracker.whistle_riley", "activity_streak") }}'
+        unit_of_measurement: "days"
+      riley_active_minutes:
+        friendly_name: "Active For"
+        icon_template: mdi:dog-side
+        value_template: '{{ state_attr("device_tracker.whistle_riley", "activity_minutes_active") }}'
+        unit_of_measurement: "minutes"
+      riley_rest_minutes:
+        friendly_name: "Rest For"
+        icon_template: mdi:sleep
+        value_template: '{{ state_attr("device_tracker.whistle_riley", "activity_minutes_rest") }}'
+        unit_of_measurement: "minutes"
+      riley_battery_level:
+        friendly_name: "Battery Level"
+        icon_template: mdi:battery
+        value_template: '{{ state_attr("device_tracker.whistle_riley", "battery_level") }}'
+        unit_of_measurement: "%"
+      zoes_server_status:
+        friendly_name: "Zoe's Minecraft Server"
+        value_template: >-
+          {% if is_state('binary_sensor.zoe_s_server_status', 'on') %}
+            Up
+          {% else %}
+            Down
+          {% endif %}
+      eliot_zoom_status:
+        friendly_name: "Zoom"
+        value_template: >-
+          {% if is_state('group.eliot_zoom', 'on') %}
+            In Meeting
+          {% else %}
+            Not Connected
+          {% endif %}
+        icon_template: >-
+          {% if is_state('sensor.eliot_zoom_status', 'In Meeting') %}
+            mdi:video
+          {% else %}
+            mdi:video-off
+          {% endif %}
+      zoe_zoom_status:
+        friendly_name: "Zoom"
+        value_template: >-
+          {% if is_state('binary_sensor.zoom_zoe', 'on') %}
+            In Meeting
+          {% else %}
+            Not Connected
+          {% endif %}
+        icon_template: >-
+          {% if is_state('sensor.zoe_zoom_status', 'In Meeting') %}
+            mdi:video
+          {% else %}
+            mdi:video-off
+          {% endif %}
+      number_of_persons_zoom:
+        friendly_name: "People Zoom"
+        value_template: >
+          {{ expand(states.group.zoom)|selectattr('state','equalto','In Meeting')|list|length }}

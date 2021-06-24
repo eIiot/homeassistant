@@ -1,0 +1,323 @@
+# Theme based on Google app dark theme
+# Creator: Juan - @juanmtech
+# Website: https://www.juanmtech.com
+# YouTube Channel: https://youtube.com/juanmtech
+# My Home Assistant Config files: https://github.com/JuanMTech/Home_Assistant_files
+#
+#
+Google Dark Theme 2:
+  # Header:
+  app-header-background-color: rgb(23, 23, 23)
+  app-header-text-color: rgb(198, 203, 210)
+  # Main Interface Colors
+  primary-color: rgb(138, 180, 248)
+  light-primary-color: var(--primary-color)
+  primary-background-color: rgb(23, 23, 23)
+  secondary-background-color: rgb(32, 33, 36)
+  divider-color: var(--primary-background-color)
+  accent-color: rgb(138, 180, 248)
+  # Text
+  primary-text-color: rgb(242, 242, 242)
+  secondary-text-color: rgb(166, 166, 166)
+  text-primary-color: var(--primary-text-color)
+  disabled-text-color: rgba(184, 190, 199, 0.4)
+  # Sidebar Menu
+  sidebar-icon-color: rgb(169, 177, 188)
+  sidebar-text-color: rgb(198, 203, 210)
+  sidebar-background-color: rgb(32, 33, 36)
+  sidebar-selected-background-color: var(--primary-background-color)
+  sidebar-selected-icon-color: rgb(138, 180, 248)
+  sidebar-selected-text-color: var(--sidebar-selected-icon-color)
+  # Buttons
+  paper-item-icon-color: rgb(169, 177, 188)
+  paper-item-icon-active-color: rgb(138, 180, 248)
+  # States and Badges
+  state-icon-color: rgb(138, 180, 248)
+  state-icon-active-color: rgb(169, 177, 188)
+  state-icon-unavailable-color: var(--disabled-text-color)
+  # Sliders
+  paper-slider-knob-color: rgb(138, 180, 248)
+  paper-slider-knob-start-color: var(--paper-slider-knob-color)
+  paper-slider-pin-color: var(--paper-slider-knob-color)
+  paper-slider-active-color: var(--paper-slider-knob-color)
+  paper-slider-secondary-color: var(--light-primary-color)
+  # Labels
+  label-badge-background-color: rgb(32, 33, 36)
+  label-badge-text-color: rgb(198, 203, 210)
+  label-badge-red: rgb(208, 101, 104)
+  label-badge-green: rgb(128, 200, 132)
+  label-badge-blue: rgb(138, 180, 248)
+  label-badge-yellow: rgb(223, 194, 113)
+  label-badge-gray: rgb(95, 98, 103)
+  # Cards
+  card-background-color: '#222627'
+  ha-card-box-shadow: 'none'
+  ha-card-border-radius: "10px"
+  paper-dialog-background-color: var(--card-background-color)
+  paper-listbox-background-color: var(--card-background-color)
+  paper-card-background-color: var(--card-background-color)
+  dialog-backdrop-filter: blur(5px)
+  iron-overlay-backdrop-opacity: 1
+  iron-overlay-backdrop-background-color: rgba(0, 0, 0, 0.32)
+  # Switches
+  switch-checked-button-color: rgb(138, 180, 248)
+  switch-checked-track-color: rgb(138, 180, 248)
+  switch-unchecked-button-color: rgb(172, 176, 185)
+  switch-unchecked-track-color: rgb(154, 160, 166)
+  # Toggles
+  paper-toggle-button-checked-button-color: var(--switch-checked-button-color)
+  paper-toggle-button-checked-bar-color: var(--switch-checked-track-color)
+  paper-toggle-button-unchecked-button-color: var(--switch-unchecked-button-color)
+  paper-toggle-button-unchecked-bar-color: var(--switch-unchecked-track-color)
+  # Table
+  table-row-background-color: var(--primary-background-color)
+  table-row-alternative-background-color: var(--secondary-background-color)
+  data-table-background-color: var(--primary-background-color)
+  mdc-checkbox-unchecked-color: rgb(169, 177, 188)
+  # Dropdowns
+  material-background-color: var(--secondary-background-color)
+  material-secondary-background-color: var(--primary-background-color)
+  mdc-theme-surface: var(--primary-background-color)
+  # Pre/Code
+  markdown-code-background-color: rgb(23, 23, 23)
+  #custom
+  bar-card-border-radius: '0.3em'
+  #card-mod
+  card-mod-theme: Google Dark Theme 2
+  card-color: rgba(34,38,39,0.9)
+  card-header: rgba(48,52,52,0.8)
+
+  card-mod-element: |
+    .markdown-sidebar {
+      font-size: 1.5vw;
+      font-weight: 300;
+      width: 15.5vw;
+      height: 1px;
+      font-family: SF Display;
+      line-height: 2.05vw;
+      letter-spacing: 0.06vw;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+    }
+
+    .markdown-covid19 {
+      font-size: 1.26vw;
+      font-weight: 400;
+      width: 90vw;
+      height: 1px;
+      letter-spacing: 0.065vw;
+      --mdc-icon-size: 1.2vw;
+      font-family: SF Display;
+      letter-spacing: 0.06vw;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+    }
+
+  card-mod-card: |
+    ha-card {
+      background: none;
+    }
+
+    #root>hui-icon-element {
+      color: rgb(255, 255, 255);
+      opacity: 0.1;
+      padding: 0.8vw;
+      --mdc-icon-size: 4vw;
+      transition: 0.4s;
+    }
+
+    #root>hui-icon-element:hover {
+      opacity: 0.25 !important;
+      transition: none;
+    }
+
+    #root>hui-icon-element:active {
+      opacity: 0.35 !important;
+      transition: none;
+    }
+
+    #root>hui-state-label-element {
+      color: #bcbebf;
+      font-family: SF Text;
+      font-size: 2.4vw;
+      font-weight: 500;
+      max-width: 1px;
+      cursor: default;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *              TYPES              *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .type-entities {
+      padding: 0.3em 1.25em 0.4em 0.5em;
+    }
+
+    .type-history-graph {
+      margin: 0.8em -1.9em -1.5em -0.8em;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *             CLASSES             *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .card-header {
+      margin: -0.27em 0 0.88em 0.4em;
+      font-family: SF Text;
+      letter-spacing: 0.005em;
+      font-size: 1.5em;
+    }
+
+    .add-header {
+      background: linear-gradient(180deg,
+        var(--card-header) 0%,
+        var(--card-header) 4.6em,
+        var(--card-color) 4.6em,
+        var(--card-color) 100%);
+      border-radius: 1em;
+    }
+
+    .map {
+      height: 24.9em;
+      border-top: 1px solid #FFFFFF !important;
+      filter: invert(1) contrast(80%) hue-rotate(250deg);
+    }
+
+    .information_network {
+      background: none;
+      margin-top: -0.7em;
+      z-index: 2;
+      padding: 1.4px;
+      width: 15em;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *            BAR CARD             *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .type-custom-bar-card bar-card-name {
+      padding-left: 0.25em;
+    }
+
+    .type-custom-bar-card bar-card-iconbar {
+      padding-left: 0.23em;
+    }
+
+    .type-custom-bar-card bar-card-value {
+      margin-right: auto;
+      color: #e0e1e1;
+      text-shadow: none;
+      font-size: 1em;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .type-custom-bar-card bar-card-backgroundbar {
+      background: none;
+    }
+
+    .type-custom-bar-card bar-card-background {
+      background: radial-gradient(circle, rgba(52, 57, 58, 0.1) 0%, rgba(17,18,18,0.2) 75%);
+      box-shadow: inset 0 0 25px #00000045;
+      border-radius: 0.3em;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *          CALENDAR CARD          *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .type-custom-calendar-card {
+      margin: -1.5em 1.3em 0.55em 1.2em;
+      height: 20em;
+    }
+
+    .type-custom-calendar-card > div {
+      margin-bottom: 0.4em;
+    }
+
+    .type-custom-calendar-card > table > tbody > tr > td > div {
+      opacity: 0.5;
+    }
+
+    .type-custom-calendar-card > table > tbody > tr > td {
+      cursor: default !important;
+    }
+
+    .type-custom-calendar-card > table > tbody > tr > td.overview.no-pointer > div {
+      opacity: 1;
+    }
+
+  card-mod-more-info-yaml: |
+    .: |
+      app-toolbar {
+        background: none !important;
+      }
+      mwc-icon-button {
+        margin-top: -3px;
+        color: #9e9e9e;
+      }
+      .main-title {
+        margin-top: 5px;
+        font-family: SF Text;
+        letter-spacing: 0.005em;
+      }
+
+    $: |
+      .mdc-dialog__scrim {
+        backdrop-filter: blur(20px) brightness(70%);
+        -webkit-backdrop-filter: blur(20px) brightness(70%);
+      }
+      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+        background: linear-gradient(180deg,
+          var(--card-header) 0%,
+          var(--card-header) 4.6em,
+          var(--card-color) 4.6em,
+          var(--card-color) 100%);
+        box-shadow: none;
+        border-radius: 1em;
+      }
+
+
+
+          /* * * * * * * * * * * * * * * * * *
+           *                                 *
+           *        LIGHT POPUP CARD         *
+           *                                 *
+           * * * * * * * * * * * * * * * * * */
+
+    "div>hui-entities-card":
+      $:
+        "#states>div>light-popup-card":
+          $: |
+            #popup {
+              margin: -2.4em 0 1.4em 0;
+              isolation: isolate;
+            }
+            #popup>div.range-holder>input[type=range] {
+              cursor: grab;
+            }
+            #brightnessValue {
+              color: rgba(255, 255, 255, 0.8);
+              margin: 4em 0 0 0;
+              font-size: 2em;
+              font-weight: 400;
+              position: absolute;
+              z-index: 100;
+              font-family: SF Display;
+              letter-spacing: 0.02em;
+              pointer-events: none;
+              mix-blend-mode: difference;
+              text-align: center;
+              width: 3.4em;
+              height: 3.4em;
+            }

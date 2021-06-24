@@ -1,0 +1,36 @@
+ person_tom:
+  card:
+    type: 'custom:button-card'
+    entity: person.tom
+    style:
+      top: 20.35%
+      left: 80.05%
+      width: 20%
+    template:
+      - person
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Tom
+        card:
+          type: entities
+          entities:
+            - type: 'custom:hui-element'
+              card_type: map
+              entities:
+                - entity: person.tom
+              dark_mode: true
+              hours_to_show: 12
+            - type: 'custom:hui-element'
+              card_type: horizontal-stack
+              cards:
+                - type: custom:button-card
+                  icon: mdi:map-marker-radius
+                  template:
+                    - icon_only
+                  tap_action:
+                    action: call-service
+                    service: notify.mobile_app_th_iphone_6s
+                    service_data:
+                      message: request_location_update

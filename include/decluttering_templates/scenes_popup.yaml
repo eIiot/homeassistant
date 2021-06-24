@@ -1,0 +1,38 @@
+scenes_popup:
+  card:
+    type: 'custom:mod-card'
+    style: |
+      ha-card {
+        padding: 7px;
+      }
+    card:
+      type: grid
+      collumns: 1
+      cards:
+        - type: custom:button-card
+          entity: scene.sunrise
+          name: Sunrise
+          icon: mdi:white-balance-sunny
+          template:
+            - icon_name
+        - type: custom:button-card
+          entity: scene.sunset
+          name: Sunset
+          icon: mdi:weather-night
+          template:
+            - icon_name
+        - type: custom:button-card
+          entity: input_boolean.input_schedule
+          name: Schedule
+          icon: mdi:fast-forward
+          template:
+            - icon_name     
+          tap_action:
+            action: fire-dom-event
+            browser_mod:
+              command: popup
+              title: |
+                Schedule Devices
+              card:
+                type: "custom:decluttering-card"
+                template: schedule_popup

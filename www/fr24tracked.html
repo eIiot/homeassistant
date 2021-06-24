@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>FR24 Feeder Tracked Aircraft</title>
+	<link id="new" title="Main" rel="stylesheet" type="text/css" href="fr24.css"/>
+	
+	<script type="text/javascript" src="jquery.js"></script>
+	
+	<script type="text/javascript">
+	
+	function update_aircraft_cb(data)
+	{
+		var tt = '';
+		
+		for(var i in data) {
+			var ac = data[i];
+			
+			//"x4a914f": ["4A914F", 59.2893, 18.1239, 305, 2275, 179, "5322", 0, "", "", 1415781759, "", "", "", 0, -640, "SCW10"]
+            
+            var callsign = 'N/A';
+            if(ac[16]) {
+                callsign = '<a href="http://www.flightradar24.com/' + ac[16] + '/" target="_blank">' + ac[16] + '</a>';
+            }
+            
+            var lat = 'N/A';
+            var lon = 'N/A';
+            if(ac[1] != "" && ac[2] != "" && Math.abs(ac[1]) > 0.001 && Math.abs(ac[2]) > 0.001) {
+                lat = ac[1];
+                lon = ac[2];
+            }
+			
+			try {
+				tt += ('ModeS: ' + ac[0] + ' Callsign: ' + callsign + 
+				'<br/>  Lat: ' + lat + '<br/> Long: ' + lon + '<br/>  Alt: ' + ac[4] + 'ft<br/>' +
+				'  SQW: ' + (ac[6] || "N/A") + '<br/><br/>');
+			} catch(e) { }
+		}
+	
+		$('#tracked').html(tt);
+		$('#time').html('Updated: ' + new Date().toTimeString());
+		
+		window.setTimeout(update_aircraft, 5000);
+	}
+	
+	function update_aircraft() {
+		$.ajax({url:'/flights.json?time=' + $.now(), dataType:'json', type:'get', data: $.now() }).done(function(data){update_aircraft_cb(data);});
+	}
+	
+	$( document ).ready(function() {
+		update_aircraft();
+	});
+	</script>
+	
+</head>
+<body>
+<h2>FR24 Feeder Tracked Aircraft List</h2>
+<h6 id="time">Updated: N/A</h6>
+<pre id="tracked" >
+	Please wait...
+</pre>
+
+</body>
+</html>

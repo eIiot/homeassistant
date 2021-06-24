@@ -1,0 +1,31 @@
+fans_popup:
+  card:
+    type: "custom:mod-card"
+    style: |
+      ha-card {
+        padding: 7px;
+      }
+    card:
+      type: grid
+      columns: 2
+      cards:
+        - type: custom:button-card
+          entity: switch.bedroom_fan
+          name: Bedroom Fan
+          style:
+            top: 20.35%
+            left: 80.05%
+            width: 20%
+          template:
+            - base
+            - icon_fan
+        - type: custom:button-card
+          entity: switch.desk_fan
+          name: Desk Fan
+          style:
+            top: 20.35%ß
+            left: 80.05%
+            width: 20%
+          template:
+            - base
+            - icon_fan                  

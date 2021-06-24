@@ -1,0 +1,8 @@
+mail_popup:
+  card:
+    type: vertical-stack
+    cards:
+      - type: picture-entity
+        entity: camera.mail_usps_camera
+        show_name: false
+        show_state: false

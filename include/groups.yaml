@@ -1,0 +1,33 @@
+people:
+  name: People
+  entities:
+    - person.eliot
+    - person.zoe
+    - person.tom
+    - person.holly
+
+eliot_zoom:
+  name: Zoom
+  entities:
+    - binary_sensor.zoom_eliot
+    - binary_sensor.zoom_eliot_s_school_account
+
+motion_sensors:
+  name: Motion Sensors
+  entities:
+    - binary_sensor.basement
+    - binary_sensor.driveway
+    - binary_sensor.deck
+    - binary_sensor.below_deck
+    - binary_sensor.basement_motion_sensor
+
+doors:
+  name: Doors
+  entities:
+    - binary_sensor.basement_door
+
+bedroom_fans:
+  name: Bedroom Fans
+  entities:
+    - switch.bedroom_fan
+    - switch.desk_fan

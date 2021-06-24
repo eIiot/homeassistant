@@ -1,0 +1,22 @@
+ motion_deck:
+  card:
+    type: 'custom:button-card'
+    entity: binary_sensor.deck
+    name: Deck
+    style:
+      top: 20.35%
+      left: 80.05%
+      width: 20%
+    template:
+      - base_blank
+      - motion
+#    tap_action:
+#      action: fire-dom-event
+#      browser_mod:
+#        command: toast
+#        message: "This camera is batterey powered, and not avalible within Homeassistant :("
+#        card:
+#          type: picture-entity
+#          entity: camera.basement
+#          show_name: false
+#          show_state: false

@@ -1,0 +1,537 @@
+button_card_templates: !include /config/include/button_card_templates.yaml
+
+decluttering_templates: !include_dir_merge_named /config/include/decluttering_templates/
+
+views:
+  - title: Home
+    path: home
+    panel: true
+    icon: mdi:home-lightbulb-outline
+    type: "custom:masonry-layout"
+    visible:
+      - user: 9ba72fd205ca4c439c2cdcad168099f6
+      - user: 0929252a1fdf43ec97650457ade2380b
+      - user: 92df5cba42ce4c738b96e3d273c93dde
+      - user: d999840322c9472fa984d6088dc8cd5f
+      - user: 72605f4fbe38484388d33670ebe28c8c
+      - user: cde27146bc9e407791d479705f91e822    
+      - user: e0832e0790bb4e34a322da1634380a88 ## Zoe      
+    badges: []
+    cards:
+      - type: custom:decluttering-card
+        template: pre_lovelace
+        variables:
+          - lovelace: "lovelace"     
+  - type: "custom:masonry-layout"
+    icon: "mdi:server"
+    visible:
+      - user: 72605f4fbe38484388d33670ebe28c8c
+    badges: []
+    cards:
+      - type: "custom:uptime-card"
+        entity: binary_sensor.updater
+        name: Homeassistant Updates
+        icon: "mdi:server"
+        ko_icon: "mdi:server-off"
+        ko: off
+        icon_adaptive_color: true
+        alias:
+          ok: No Updates
+          ko: Update Needed
+        bar:
+          spacing: 4
+          height: 25
+          round: 4
+        show: null
+        alignment:
+          status: spaced
+          header: left
+          icon_first: true
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Homeassistant
+            card:
+              type: grid
+              cards:
+                - type: 'custom:mini-graph-card'
+                  name: Memory Use
+                  entities:
+                    - entity: sensor.memory_use_percent
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: 'custom:mini-graph-card'
+                  name: Swap Use
+                  entities:
+                    - entity: sensor.swap_use_percent
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: 'custom:mini-graph-card'
+                  name: CPU Temp
+                  entities:
+                    - entity: sensor.processor_temperature_c
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 120
+                - type: 'custom:mini-graph-card'
+                  name: CPU Use
+                  entities:
+                    - entity: sensor.processor_use_percent
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: 'custom:mini-graph-card'
+                  name: Disk Use
+                  entities:
+                    - entity: sensor.disk_use_percent
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: button
+                  name: Restart/Reboot
+                  tap_action:
+                    action: call-service
+                    service: homeassistant.restart
+                    service_data: {}
+                    target: {}
+                  icon: 'mdi:restart'
+                  hold_action:
+                    action: call-service
+                    service: hassio.host_reboot
+                    service_data: {}
+                    target: {}
+              columns: 2                
+      - type: "custom:uptime-card"
+        entity: sensor.pi24_server_status
+        name: Pi24
+        icon: "mdi:server"
+        ko_icon: "mdi:server-off"
+        ko: Down
+        icon_adaptive_color: true
+        bar:
+          spacing: 4
+          height: 25
+          round: 4
+        show: null
+        alignment:
+          status: spaced
+          header: left
+          icon_first: true
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Pi24
+            card:
+              type: grid
+              columns: 2
+              cards:
+                - type: 'custom:mini-graph-card'
+                  name: Memory Use
+                  entities:
+                    - entity: sensor.fr24_memory_use
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: 'custom:mini-graph-card'
+                  name: Swap Use
+                  entities:
+                    - entity: sensor.fr24_swap_usage
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: 'custom:mini-graph-card'
+                  name: CPU Temp
+                  entities:
+                    - entity: sensor.fr24_temperature_c
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 120
+                - type: 'custom:mini-graph-card'
+                  name: CPU Use
+                  entities:
+                    - entity: sensor.fr24_cpu_usage
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: 'custom:mini-graph-card'
+                  name: Disk Use
+                  entities:
+                    - entity: sensor.fr24_disk_use
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 70
+                      color: '#ebc860'
+                    - value: 90
+                      color: '#eb6065'
+                  points_per_hour: 1
+                  lower_bound: 0
+                  upper_bound: 100
+                - type: button
+                  name: Stats
+                  icon: mdi:airplane
+                  tap_action:
+                    action: fire-dom-event
+                    browser_mod:
+                      command: popup
+                      title: Pi24
+                      card:
+                        type: grid
+                        cards:
+                          - type: 'custom:mini-graph-card'
+                            name: Tracking
+                            entities:
+                              - entity: sensor.fr24_feeder_aircraft_tracked
+                            color_thresholds:
+                              - value: 0
+                                color: '#eb6065'
+                              - value: 5
+                                color: '#ebc860'
+                              - value: 10
+                                color: '#5feb66'
+                            points_per_hour: 1
+                            lower_bound: 0
+                            upper_bound: 30
+                          - type: 'custom:mini-graph-card'
+                            name: Uploaded
+                            entities:
+                              - entity: sensor.fr24_feeder_aircraft_uploaded
+                            color_thresholds:
+                              - value: 0
+                                color: '#eb6065'
+                              - value: 3
+                                color: '#ebc860'
+                              - value: 6
+                                color: '#5feb66'
+                            points_per_hour: 1
+                            lower_bound: 0
+                            upper_bound: 30
+                          - type: entity
+                            entity: sensor.fr24_feeder_receiver_connected
+                            name: Reciever
+                            icon: 'mdi:server'
+                            style: |
+                              ha-card {
+                                background: {% if is_state('sensor.fr24_feeder_receiver_connected', 'Up') %} #4CAF50 {% endif %};
+                                background: {% if is_state('sensor.fr24_feeder_receiver_connected', 'Down') %} #FF5252 {% endif %};
+                              }
+                              ha-card .name {
+                              color: white;
+                              }
+                          - type: entity
+                            entity: sensor.fr24_feeder_link_connected
+                            name: Link
+                            icon: 'mdi:server'
+                            style: |
+                              ha-card {
+                                background: {% if is_state('sensor.fr24_feeder_receiver_connected', 'Up') %} #4CAF50 {% endif %};
+                                background: {% if is_state('sensor.fr24_feeder_receiver_connected', 'Down') %} #FF5252 {% endif %};
+                              }
+                              ha-card .name {
+                              color: white;
+                              }
+                          - type: entity
+                            entity: sensor.fr24_feeder_radar_code
+                            name: Radar
+                          - type: button
+                            name: Restart
+                            tap_action:
+                              action: call-service
+                              service: hassio.addon_stdin
+                              service_data:
+                                addon: a0d7b954_ssh
+                                input: ssh pi@192.168.7.217 sudo reboot
+                            icon: 'mdi:restart'
+                        columns: 2
+      - type: "custom:uptime-card"
+        entity: sensor.zoes_server_status
+        name: Zoe's Minecraft Server
+        icon: "mdi:server"
+        ko_icon: "mdi:server-off"
+        ko: Down
+        icon_adaptive_color: true
+        bar:
+          spacing: 4
+          height: 25
+          round: 4
+        show: null
+        alignment:
+          status: spaced
+          header: left
+          icon_first: true
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Server
+            card:
+              type: vertical-stack
+              cards:
+                - type: 'custom:mini-graph-card'
+                  name: Players
+                  entities:
+                    - entity: sensor.zoe_s_server_players_online
+                  points_per_hour: 4
+                  lower_bound: 0
+                  upper_bound: 10
+                - type: 'custom:mini-graph-card'
+                  name: Ping
+                  entities:
+                    - entity: sensor.zoe_s_server_latency_time
+                  color_thresholds:
+                    - value: 0
+                      color: '#5feb66'
+                    - value: 40
+                      color: '#ebc860'
+                    - value: 70
+                      color: '#eb6065'
+                  points_per_hour: 4
+                  lower_bound: 0
+                  upper_bound: 200
+
+      - type: "custom:uptime-card"
+        entity: sensor.android_server_status
+        name: Android Server
+        icon: "mdi:server"
+        ko_icon: "mdi:server-off"
+        ko: Down
+        icon_adaptive_color: true
+        bar:
+          spacing: 4
+          height: 25
+          round: 4
+        show: null
+        alignment:
+          status: spaced
+          header: left
+          icon_first: true
+        tap_action:
+          action: more-info
+
+      - type: "custom:uptime-card"
+        entity: sensor.backup_status
+        name: Backup
+        icon: "mdi:server"
+        ko_icon: "mdi:server-off"
+        ko: Error
+        icon_adaptive_color: true
+        bar:
+          spacing: 4
+          height: 25
+          round: 4
+        show: null
+        alignment:
+          status: spaced
+          header: left
+          icon_first: true
+        tap_action:
+          action: more-info          
+
+      - type: grid
+        collumns: 2
+        cards:
+          - type: button
+            name: Wifi
+            icon: mdi:wifi
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: Chart
+                card:
+                  type: entities
+                  entities:
+                    - type: 'custom:hui-element'
+                      card_type: custom:mini-graph-card
+                      name: Speedtest
+                      icon: 'mdi:wifi'
+                      align_icon: left
+                      align_state: center
+                      entities:
+                        - entity: sensor.speedtest_download
+                          name: Download
+                          show_fill: false
+                        - entity: sensor.speedtest_upload
+                          name: Upload
+                          show_fill: false
+                    - type: 'custom:hui-element'
+                      card_type: horizontal-stack
+                      cards:
+                        - type: custom:button-card
+                          icon: mdi:qrcode
+                          template:
+                            - icon_only
+                          tap_action:
+                            action: call-service
+                            service: input_boolean.turn_on
+                            service_data:
+                              entity_id: input_boolean.wifi_qr_code
+          - type: button
+            name: Esp
+            icon: si:esphome
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                title: Esp Devices
+                card:    
+                  type: vertical-stack
+                  cards:
+                    - type: "custom:uptime-card"
+                      entity: sensor.living_room_esp32_status
+                      name: Living Room Esp32
+                      icon: "mdi:server"
+                      ko_icon: "mdi:server-off"
+                      ko: Down
+                      icon_adaptive_color: true
+                      bar:
+                        spacing: 4
+                        height: 25
+                        round: 4
+                      show: null
+                      alignment:
+                        status: spaced
+                        header: left
+                        icon_first: true
+                      tap_action:
+                        action: more-info
+                    - type: "custom:uptime-card"
+                      entity: sensor.bedroom_esp32_status
+                      name: Bedroom Esp32
+                      icon: "mdi:server"
+                      ko_icon: "mdi:server-off"
+                      ko: Down
+                      icon_adaptive_color: true
+                      bar:
+                        spacing: 4
+                        height: 25
+                        round: 4
+                      show: null
+                      alignment:
+                        status: spaced
+                        header: left
+                        icon_first: true
+                      tap_action:
+                        action: more-info
+                    - type: "custom:uptime-card"
+                      entity: sensor.upstairs_esp32_status
+                      name: Bedroom Esp32
+                      icon: "mdi:server"
+                      ko_icon: "mdi:server-off"
+                      ko: Down
+                      icon_adaptive_color: true
+                      bar:
+                        spacing: 4
+                        height: 25
+                        round: 4
+                      show: null
+                      alignment:
+                        status: spaced
+                        header: left
+                        icon_first: true
+                      tap_action:
+                        action: more-info
+                    - type: "custom:uptime-card"
+                      entity: sensor.basement_esp32_status
+                      name: Basement Esp32
+                      icon: "mdi:server"
+                      ko_icon: "mdi:server-off"
+                      ko: Down
+                      icon_adaptive_color: true
+                      bar:
+                        spacing: 4
+                        height: 25
+                        round: 4
+                      show: null
+                      alignment:
+                        status: spaced
+                        header: left
+                        icon_first: true
+                      tap_action:
+                        action: more-info                  
+                                              
+##  - title: ''
+##   path: ''
+##    icon: 'mdi:home'
+##    visible:
+##      - user: e0832e0790bb4e34a322da1634380a88
+##    badges: []
+##    cards:
+##      - type: entities
+##        entities:
+##          - entity: light.bedroom_led_strip
+##          - entity: light.bedside_lamp_msl100r_main_channel
+##          - entity: light.ebb7b9611fcfb6bd73ux5j
+##          - entity: switch.bookcase_lights
+##          - entity: switch.deck_lights
+##          - entity: switch.bedroom_lamp_left
+##          - entity: switch.bedroom_lamp_right
+##          - entity: switch.fireplace_lamp
+##          - entity: switch.kettle

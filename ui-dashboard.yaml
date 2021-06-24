@@ -1,0 +1,381 @@
+popup_cards:
+  light.beganegrond:
+    title: ''
+    style:
+      $: |
+        .mdc-dialog .mdc-dialog__container {
+          width: 100%;
+        }
+        .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+          width:100%;
+          box-shadow:none;
+        }
+      .: |
+        :host {
+          --mdc-theme-surface: rgba(0,0,0,0);
+          --secondary-background-color: rgba(0,0,0,0);
+          --ha-card-background: rgba(0,0,0,0);
+          --mdc-dialog-scrim-color: rgba(0,0,0,0.8);
+          --mdc-dialog-min-height: 100%;
+          --mdc-dialog-min-width: 100%;
+          --mdc-dialog-max-width: 100%;
+        }
+        mwc-icon-button {
+          color: #FFF;
+        }
+    card:
+      type: 'custom:light-popup-card'
+      entity: light.beganegrond
+      icon: 'mdi:led-strip'
+      actionsInARow: 2
+      brightnessWidth: 150px
+      brightnessHeight: 400px
+      switchWidth: 150px
+      switchHeight: 400px
+      actions:
+        - service: scene.turn_on
+          service_data:
+            entity_id: scene.ontspannen
+          color: '#FDCA64'
+          name: ontspannen
+        - service: scene.turn_on
+          service_data:
+            entity_id: scene.helder
+          color: '#FFE7C0'
+          name: helder
+        - service: scene.turn_on
+          service_data:
+            entity_id: scene.concentreren
+          color: '#BBEEF3'
+          name: concentreren
+        - service: scene.turn_on
+          service_data:
+            entity_id: scene.energie
+          color: '#8BCBDD'
+          name: energie
+views:
+  - title: Home
+    visible:
+      - user: 72605f4fbe38484388d33670ebe28c8c
+      - user: 9ba72fd205ca4c439c2cdcad168099f6
+      - user: e0832e0790bb4e34a322da1634380a88
+      - user: cde27146bc9e407791d479705f91e822
+      - user: d999840322c9472fa984d6088dc8cd5f
+      - user: 92df5cba42ce4c738b96e3d273c93dde
+    icon: 'mdi:home-outline'
+    path: home
+    type: 'custom:masonry-layout'
+    layout:
+      max_cols: 2
+    badges: []
+    cards:
+      - type: 'custom:weather-card'
+        entity: weather.openweathermap
+        number_of_forecasts: '0'
+      - type: entities
+        entities:
+          - entity: person.eliot
+            secondary_info: last-updated
+          - entity: person.zoe
+            secondary_info: last-updated
+          - entity: person.tom
+            secondary_info: last-updated
+          - entity: person.holly
+            secondary_info: last-updated
+          - entity: person.barb
+            secondary_info: last-updated
+          - entity: person.riley
+            secondary_info: last-updated
+          - entity: person.hobbes
+            secondary_info: last-updated
+          - entity: person.hobbes_jr
+            secondary_info: last-updated
+        show_header_toggle: false
+      - type: 'custom:mini-graph-card'
+        name: Tempature
+        icon: 'mdi:thermometer'
+        align_icon: left
+        align_state: center
+        entities:
+          - entity: sensor.living_room_temperature
+            name: Living Room
+            show_fill: false
+          - entity: sensor.bedroom_temperature
+            name: Bedroom
+            show_fill: false
+          - entity: sensor.upstairs_temperature
+            name: Upstairs
+            show_fill: false
+          - entity: sensor.basement_temperature
+            name: Basement
+            show_fill: false
+          - entity: sensor.outdoor_temperature
+            name: Outside
+            show_fill: false
+      - type: 'custom:mini-graph-card'
+        name: Humidity
+        icon: 'mdi:thermometer'
+        align_icon: left
+        align_state: center
+        entities:
+          - entity: sensor.living_room_humidity
+            name: Living Room
+            show_fill: false
+          - entity: sensor.bedroom_humidity
+            name: Bedroom
+            show_fill: false
+          - entity: sensor.upstairs_humidity
+            name: Upstairs
+            show_fill: false
+          - entity: sensor.basement_humidity
+            name: Basement
+            show_fill: false
+          - entity: sensor.outdoor_humidity
+            name: Outside
+            show_fill: false
+      - type: 'custom:state-switch'
+        entity: user
+        default: default
+        states:
+          Tom:
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.deck_lights
+            icon: 'mdi:lightbulb'
+          Holly:
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.deck_lights
+            icon: 'mdi:lightbulb'
+          default:
+            type: conditional
+            conditions:
+              - entity: input_boolean.invisible_card
+                state: 'on'
+            card:
+              type: markdown
+              content: This will never be shown
+      - type: 'custom:state-switch'
+        entity: user
+        default: default
+        states:
+          Tom:
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.fireplace_lamp
+          Holly:
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.fireplace_lamp
+          default:
+            type: conditional
+            conditions:
+              - entity: input_boolean.invisible_card
+                state: 'on'
+            card:
+              type: markdown
+              content: This will never be shown
+      - type: 'custom:state-switch'
+        entity: user
+        default: default
+        states:
+          Tom:
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.bookcase_lights
+          Holly:
+            type: button
+            tap_action:
+              action: toggle
+            entity: switch.bookcase_lights
+          default:
+            type: conditional
+            conditions:
+              - entity: input_boolean.invisible_card
+                state: 'on'
+            card:
+              type: markdown
+              content: This will never be shown
+  - title: ''
+    path: downstairs-bedroom
+    icon: 'mdi:bed-single-outline'
+    visible: []
+    badges: []
+    cards:
+      - type: light
+        entity: light.bedside_lamp_msl100r_main_channel
+        name: Zoe's Bedside Lamp
+      - type: light
+        entity: light.bedroom_led_strip
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.bedroom_lamps
+        icon: 'mdi:lightbulb'
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.bedroom_lamp_left
+  - title: ''
+    path: living-room
+    icon: 'mdi:sofa-outline'
+    visible: []
+    badges: []
+    cards:
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.fireplace_lamp
+        icon: 'mdi:lightbulb'
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.bookcase_lights
+        icon: 'mdi:lightbulb'
+  - title: ''
+    path: upstairs-bedroom
+    icon: 'mdi:bed-king-outline'
+    visible: []
+    badges: []
+    cards: []
+  - title: ''
+    path: kitchen
+    icon: 'mdi:stove'
+    visible: []
+    badges: []
+    cards: []
+  - icon: 'mdi:book'
+    path: office
+    visible: []
+    badges: []
+    cards: []
+  - title: ''
+    path: basement
+    icon: 'mdi:bicycle'
+    visible: []
+    badges: []
+    cards:
+      - type: light
+        entity: light.ebb7b9611fcfb6bd73ux5j
+      - type: 'custom:roku-card'
+        entity: media_player.basement_roku
+        tv: true
+        volume_up:
+          tap_action:
+            action: call-service
+            service: remote.send_command
+            service_data:
+              entity_id: remote.basement_roku
+              command: play
+        volume_down:
+          double_tap_action:
+            action: call-service
+            service: remote.send_command
+            service_data:
+              entity_id: remote.basement_roku
+              command: play
+  - icon: 'mdi:tree-outline'
+    visible: []
+    path: outside
+    badges: []
+    cards:
+      - type: button
+        entity: switch.deck_lights
+        icon: 'mdi:lightbulb'
+  - icon: 'mdi:airplane'
+    path: fr24
+    visible:
+      - user: 72605f4fbe38484388d33670ebe28c8c
+    panel: false
+    badges: []
+    cards:
+      - type: entity
+        entity: sensor.opensky
+        name: Flights Above
+      - type: conditional
+        conditions:
+          - entity: sensor.opensky
+            state_not: '0'
+        card:
+          type: entity
+          entity: sensor.openskyflights
+          icon: 'mdi:airplane'
+          attribute: callsign
+  - visible:
+      - user: d999840322c9472fa984d6088dc8cd5f
+      - user: 72605f4fbe38484388d33670ebe28c8c
+    title: Enable Location
+    path: enable-location
+    icon: 'mdi:face'
+    panel: false
+    badges: []
+    cards:
+      - type: glance
+        entities:
+          - entity: counter.eliot_brushed_teeth
+          - entity: counter.eliot_flossed
+          - entity: counter.eliot_washed_face
+          - entity: sensor.google_fit_steps
+          - entity: counter.eliot_vegetables_eaten
+          - entity: input_boolean.eliot_in_school
+          - entity: input_boolean.eliot_cleaned_room
+          - entity: input_boolean.eliot_made_bed
+          - entity: counter.bird_bucks
+        title: Eliot
+        columns: 3
+  - icon: 'mdi:pencil'
+    visible:
+      - user: 72605f4fbe38484388d33670ebe28c8c
+    badges: []
+    cards:
+      - type: button
+        entity: sun.sun
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            hide_header: true
+            title: Graph
+            deviceID:
+              - this
+            card:
+              type: 'custom:mini-graph-card'
+              name: Tempature
+              icon: 'mdi:thermometer'
+              align_icon: left
+              align_state: center
+              show_fill: false
+              entities:
+                - sensor.outdoor_temperature
+      - shorten_cards: false
+        consolidate_entities: false
+        color_wheel: true
+        persist_features: false
+        brightness: false
+        color_temp: true
+        white_value: true
+        color_picker: true
+        smooth_color_wheel: false
+        hide_header: true
+        child_card: false
+        show_slider_percent: false
+        full_width_sliders: false
+        brightness_icon: weather-sunny
+        white_icon: file-word-box
+        temperature_icon: thermometer
+        type: 'custom:light-entity-card'
+        header: ''
+        entity: light.ebb7b9611fcfb6bd73ux5j
+        effects_list: false
+      - type: button
+        icon: 'mdi:pencil'
+        tap_action:
+          action: call-service
+          service: script.1617997340775
+          service_data: {}
+          target: {}

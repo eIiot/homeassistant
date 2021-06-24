@@ -1,0 +1,129 @@
+ person_eliot:
+  card:
+    type: custom:state-switch
+    entity: sensor.eliot_zoom_status
+    default: default
+    states:
+      In Meeting:
+        type: 'custom:button-card'
+        entity: person.eliot
+        style:
+          top: 20.35%
+          left: 80.05%
+          width: 20%
+        template:
+          - person
+        styles:
+          card:
+            - box-shadow: 0px 0px 19px 3px rgba(255,0,0,0.95)                                                                      
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Eliot
+            card:
+              type: entities
+              entities:
+                - type: 'custom:hui-element'
+                  card_type: map
+                  entities:
+                    - entity: person.eliot
+                  dark_mode: true
+                  style:
+                    border-radius: 15px
+                  hours_to_show: 12
+                - type: 'custom:hui-element'
+                  card_type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      icon: mdi:map-marker-radius
+                      template:
+                        - icon_only
+                      tap_action:
+                        action: call-service
+                        service: notify.mobile_app_th_iphone_6s
+                        service_data:
+                          message: request_location_update
+                    - type: custom:button-card
+                      icon: mdi:hamburger
+                      template:
+                        - icon_only
+                      tap_action:
+                        action: fire-dom-event
+                        browser_mod:
+                          command: popup
+                          title: Eliot
+                          card:
+                            type: glance
+                            entities:
+                              - entity: counter.eliot_brushed_teeth
+                              - entity: counter.eliot_flossed
+                              - entity: counter.eliot_washed_face
+                                name: Washed Face
+                              - entity: sensor.google_fit_steps
+                              - entity: counter.eliot_vegetables_eaten
+                                name: Vegetables
+                              - entity: input_boolean.eliot_cleaned_room
+                              - entity: input_boolean.eliot_made_bed
+                              - entity: counter.bird_bucks
+                            columns: 3
+      default:                 
+        type: 'custom:button-card'
+        entity: person.eliot
+        style:
+          top: 20.35%
+          left: 80.05%
+          width: 20%
+        template:
+          - person                                                                      
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Eliot
+            card:
+              type: entities
+              entities:
+                - type: 'custom:hui-element'
+                  card_type: map
+                  entities:
+                    - entity: person.eliot
+                  dark_mode: true
+                  hours_to_show: 12
+                  style:
+                    border-radius: 15px
+                - type: 'custom:hui-element'
+                  card_type: horizontal-stack
+                  cards:
+                    - type: custom:button-card
+                      icon: mdi:map-marker-radius
+                      template:
+                        - icon_only
+                      tap_action:
+                        action: call-service
+                        service: notify.mobile_app_th_iphone_6s
+                        service_data:
+                          message: request_location_update
+                    - type: custom:button-card
+                      icon: mdi:hamburger
+                      template:
+                        - icon_only
+                      tap_action:
+                        action: fire-dom-event
+                        browser_mod:
+                          command: popup
+                          title: Eliot
+                          card:
+                            type: glance
+                            entities:
+                              - entity: counter.eliot_brushed_teeth
+                              - entity: counter.eliot_flossed
+                              - entity: counter.eliot_washed_face
+                                name: Washed Face
+                              - entity: sensor.google_fit_steps
+                              - entity: counter.eliot_vegetables_eaten
+                                name: Vegetables
+                              - entity: input_boolean.eliot_cleaned_room
+                              - entity: input_boolean.eliot_made_bed
+                              - entity: counter.bird_bucks
+                            columns: 3

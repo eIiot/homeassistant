@@ -1,0 +1,241 @@
+- id: '1618362769960'
+  name: Sunrise
+  entities:
+    light.bedroom_led_strip:
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      rate_limit_total: 100
+      rate_limit_remaining: 98
+      rate_limit_reset_seconds: 39.80605697631836
+      rate_limit_reset: 1621395070.057165
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6142
+      friendly_name: Bedroom LED Strip
+      icon: mdi:led-strip-variant
+      supported_features: 19
+      type: light-rgb
+      room: Downstairs Bedroom
+      state: 'off'
+    switch.bedside_lamp_msl100r_main_channel:
+      friendly_name: Zoe’s Bedside Lamp (msl100r) - Main channel
+      state: 'off'
+    light.bedside_lamp_msl100r_main_channel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoe's Bedside Lamp
+      supported_features: 1
+      type: light-standard
+      room: Downstairs Bedroom
+      state: 'off'
+    switch.bookcase_lights:
+      friendly_name: Bookcase Lights
+      state: 'off'
+    switch.fireplace_lamp:
+      friendly_name: Fireplace Lamp
+      state: 'off'
+    switch.deck_lights:
+      friendly_name: Deck Lights
+      state: 'off'
+    switch.bedroom_lamps:
+      friendly_name: Bedroom Lamps
+      state: 'off'
+    switch.zoe_s_desk_lamp:
+      friendly_name: Zoe's Desk Lamp
+      state: 'off'
+    light.basement:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Basement Light
+      supported_features: 19
+      state: 'off'
+- id: '1618362858978'
+  name: Sunset
+  entities:
+    light.bedroom_led_strip:
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 15
+      hs_color:
+      - 75
+      - 3.137
+      rgb_color:
+      - 253
+      - 255
+      - 247
+      xy_color:
+      - 0.326
+      - 0.337
+      rate_limit_total: 100
+      rate_limit_remaining: 94
+      rate_limit_reset_seconds: -0.1626439094543457
+      rate_limit_reset: 1618848440.053921
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6142
+      friendly_name: Bedroom LED Strip
+      icon: mdi:led-strip-variant
+      supported_features: 19
+      type: light-rgb
+      room: Downstairs Bedroom
+      state: 'on'
+    switch.bedside_lamp_msl100r_main_channel:
+      friendly_name: Zoe’s Bedside Lamp (msl100r) - Main channel
+      state: 'on'
+    light.bedside_lamp_msl100r_main_channel:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 79.05
+      friendly_name: Zoe's Bedside Lamp
+      supported_features: 1
+      type: light-standard
+      room: Downstairs Bedroom
+      state: 'on'
+    switch.bookcase_lights:
+      friendly_name: Bookcase Lights
+      icon: mdi:lightbulb
+      state: 'on'
+    switch.fireplace_lamp:
+      friendly_name: Fireplace Lamp
+      icon: mdi:lightbulb
+      state: 'on'
+    light.ebb7b9611fcfb6bd73ux5j:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 27
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      color_temp: 327
+      friendly_name: Basement
+      supported_features: 191
+      type: light-rgb
+      room: Basement
+      state: 'on'
+    switch.deck_lights:
+      friendly_name: Deck Lights
+      state: 'on'
+    switch.deck_cameras:
+      friendly_name: Deck Cameras
+      state: 'on'
+    switch.bedroom_lamps:
+      friendly_name: Bedroom Lamps
+      state: 'on'
+    switch.zoe_s_desk_lamp:
+      friendly_name: Zoe's Desk Lamp
+      state: 'on'
+    switch.barb_desk_lamp:
+      friendly_name: Barb's Desk Lamp
+      assumed_state: true
+      state: 'off'
+- id: '1618362941027'
+  name: 10pm
+  entities:
+    light.bedroom_led_strip:
+      min_mireds: 111
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - hs
+      rate_limit_total: 100
+      rate_limit_remaining: 99
+      rate_limit_reset_seconds: 59.771496057510376
+      rate_limit_reset: 1620882134.049642
+      rate_limit_on: 5
+      manufacturer: Govee
+      model: H6142
+      friendly_name: Bedroom LED Strip
+      icon: mdi:led-strip-variant
+      supported_features: 19
+      type: light-rgb
+      room: Downstairs Bedroom
+      state: 'off'
+    switch.bedside_lamp_msl100r_main_channel:
+      friendly_name: Zoe’s Bedside Lamp (msl100r) - Main channel
+      state: 'off'
+    light.bedside_lamp_msl100r_main_channel:
+      supported_color_modes:
+      - brightness
+      friendly_name: Zoe's Bedside Lamp
+      supported_features: 1
+      type: light-standard
+      room: Downstairs Bedroom
+      state: 'off'
+    light.ebb7b9611fcfb6bd73ux5j:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Basement
+      supported_features: 191
+      type: light-rgb
+      room: Basement
+      state: 'off'
+    switch.deck_lights:
+      friendly_name: Deck Lights
+      state: 'off'
+    switch.bedroom_lamps:
+      friendly_name: Bedroom Lamps
+      state: 'off'
+    switch.zoe_s_desk_lamp:
+      friendly_name: Zoe's Desk Lamp
+      state: 'off'
+- id: '1618362997383'
+  name: Downstairs Warning
+  entities:
+    light.basement:
+      min_mireds: 153
+      max_mireds: 370
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 1
+      hs_color:
+      - 345
+      - 100
+      rgb_color:
+      - 255
+      - 0
+      - 63
+      xy_color:
+      - 0.667
+      - 0.284
+      color_temp: 327
+      friendly_name: Basement Light
+      supported_features: 19
+      state: 'on'
+- id: '1618363344779'
+  name: Turn off Living Room when we are Away
+  entities:
+    switch.bookcase_lights:
+      friendly_name: Bookcase Lights
+      icon: mdi:lightbulb
+      state: 'off'
+    switch.fireplace_lamp:
+      friendly_name: Fireplace Lamp
+      icon: mdi:lightbulb
+      state: 'off'

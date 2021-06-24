@@ -1,0 +1,282 @@
+tablet:
+  app-header-background-color: '#222627'
+  primary-color: '#e0e1e1'
+  primary-background-color: '#222627'
+  primary-text-color: '#e0e1e1'
+  card-background-color: '#222627'
+  ha-card-box-shadow: 'none'
+  #icon
+  paper-item-icon-color: '#9da0a2'
+  paper-item-icon-active-color: '#3182b7'
+  #switch
+  switch-checked-color: '#7a7d7f'
+  switch-unchecked-button-color: '#3b4041'
+  switch-unchecked-track-color: '#0c0d0d'
+  #slider
+  paper-slider-knob-color: '#a4abb1'
+  paper-slider-knob-start-color: '#a4abb1'
+  paper-slider-pin-color: '#626a6f'
+  paper-slider-active-color: '#626a6f'
+  slider-container-color: '#202020'
+  #custom
+  bar-card-border-radius: '0.3em'
+
+  #card-mod
+  card-mod-theme: tablet
+  card-color: rgba(34,38,39,0.9)
+  card-header: rgba(48,52,52,0.8)
+
+  card-mod-root: |
+    hui-panel-view {
+      background: url('/local/background.png') !important;
+      background-size: cover !important;
+    }
+
+  card-mod-view-yaml: |
+    "hui-panel-view$hui-picture-elements-card$#root>hui-image$": |
+      #image {
+        pointer-events: none;
+      }
+      #brokenImage {
+        opacity: 0 !important;
+      }
+    "hui-panel-view$hui-picture-elements-card$#root>hui-state-label-element":
+      $: |
+        div {
+          padding: 0 !important;
+        }
+
+  card-mod-element: |
+    .markdown-sidebar {
+      font-size: 1.5vw;
+      font-weight: 300;
+      width: 15.5vw;
+      height: 1px;
+      font-family: SF Display;
+      line-height: 2.05vw;
+      letter-spacing: 0.06vw;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+    }
+
+    .markdown-covid19 {
+      font-size: 1.26vw;
+      font-weight: 400;
+      width: 90vw;
+      height: 1px;
+      letter-spacing: 0.065vw;
+      --mdc-icon-size: 1.2vw;
+      font-family: SF Display;
+      letter-spacing: 0.06vw;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+    }
+
+  card-mod-card: |
+    ha-card {
+      background: none;
+    }
+
+    #root>hui-icon-element {
+      color: rgb(255, 255, 255);
+      opacity: 0.1;
+      padding: 0.8vw;
+      --mdc-icon-size: 4vw;
+      transition: 0.4s;
+    }
+
+    #root>hui-icon-element:hover {
+      opacity: 0.25 !important;
+      transition: none;
+    }
+
+    #root>hui-icon-element:active {
+      opacity: 0.35 !important;
+      transition: none;
+    }
+
+    #root>hui-state-label-element {
+      color: #bcbebf;
+      font-family: SF Text;
+      font-size: 2.4vw;
+      font-weight: 500;
+      max-width: 1px;
+      cursor: default;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *              TYPES              *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .type-entities {
+      padding: 0.3em 1.25em 0.4em 0.5em;
+    }
+
+    .type-history-graph {
+      margin: 0.8em -1.9em -1.5em -0.8em;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *             CLASSES             *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .card-header {
+      margin: -0.27em 0 0.88em 0.4em;
+      font-family: SF Text;
+      letter-spacing: 0.005em;
+      font-size: 1.5em;
+    }
+
+    .add-header {
+      background: linear-gradient(180deg,
+        var(--card-header) 0%,
+        var(--card-header) 4.6em,
+        var(--card-color) 4.6em,
+        var(--card-color) 100%);
+      border-radius: 1em;
+    }
+
+    .map {
+      height: 24.9em;
+      border-top: 1px solid #FFFFFF !important;
+      filter: invert(1) contrast(80%) hue-rotate(250deg);
+    }
+
+    .information_network {
+      background: none;
+      margin-top: -0.7em;
+      z-index: 2;
+      padding: 1.4px;
+      width: 15em;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *            BAR CARD             *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .type-custom-bar-card bar-card-name {
+      padding-left: 0.25em;
+    }
+
+    .type-custom-bar-card bar-card-iconbar {
+      padding-left: 0.23em;
+    }
+
+    .type-custom-bar-card bar-card-value {
+      margin-right: auto;
+      color: #e0e1e1;
+      text-shadow: none;
+      font-size: 1em;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .type-custom-bar-card bar-card-backgroundbar {
+      background: none;
+    }
+
+    .type-custom-bar-card bar-card-background {
+      background: radial-gradient(circle, rgba(52, 57, 58, 0.1) 0%, rgba(17,18,18,0.2) 75%);
+      box-shadow: inset 0 0 25px #00000045;
+      border-radius: 0.3em;
+    }
+
+    /* * * * * * * * * * * * * * * * * *
+      *                                 *
+      *          CALENDAR CARD          *
+      *                                 *
+      * * * * * * * * * * * * * * * * * */
+
+    .type-custom-calendar-card {
+      margin: -1.5em 1.3em 0.55em 1.2em;
+      height: 20em;
+    }
+
+    .type-custom-calendar-card > div {
+      margin-bottom: 0.4em;
+    }
+
+    .type-custom-calendar-card > table > tbody > tr > td > div {
+      opacity: 0.5;
+    }
+
+    .type-custom-calendar-card > table > tbody > tr > td {
+      cursor: default !important;
+    }
+
+    .type-custom-calendar-card > table > tbody > tr > td.overview.no-pointer > div {
+      opacity: 1;
+    }
+
+  card-mod-more-info-yaml: |
+    .: |
+      app-toolbar {
+        background: none !important;
+      }
+      mwc-icon-button {
+        margin-top: -3px;
+        color: #9e9e9e;
+      }
+      .main-title {
+        margin-top: 5px;
+        font-family: SF Text;
+        letter-spacing: 0.005em;
+      }
+
+    $: |
+      .mdc-dialog__scrim {
+        backdrop-filter: blur(20px) brightness(70%);
+        -webkit-backdrop-filter: blur(20px) brightness(70%);
+      }
+      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+        background: linear-gradient(180deg,
+          var(--card-header) 0%,
+          var(--card-header) 4.6em,
+          var(--card-color) 4.6em,
+          var(--card-color) 100%);
+        box-shadow: none;
+        border-radius: 1em;
+      }
+
+
+
+          /* * * * * * * * * * * * * * * * * *
+           *                                 *
+           *        LIGHT POPUP CARD         *
+           *                                 *
+           * * * * * * * * * * * * * * * * * */
+
+    "div>hui-entities-card":
+      $:
+        "#states>div>light-popup-card":
+          $: |
+            #popup {
+              margin: -2.4em 0 1.4em 0;
+              isolation: isolate;
+            }
+            #popup>div.range-holder>input[type=range] {
+              cursor: grab;
+            }
+            #brightnessValue {
+              color: rgba(255, 255, 255, 0.8);
+              margin: 4em 0 0 0;
+              font-size: 2em;
+              font-weight: 400;
+              position: absolute;
+              z-index: 100;
+              font-family: SF Display;
+              letter-spacing: 0.02em;
+              pointer-events: none;
+              mix-blend-mode: difference;
+              text-align: center;
+              width: 3.4em;
+              height: 3.4em;
+            }

@@ -1,0 +1,17 @@
+schedule_popup:
+  card:
+    type: 'custom:mod-card'
+    style: |
+      ha-card {
+        padding: 7px;
+      }
+    card:
+      type: entities
+      entities:
+        - entity: input_select.schedule_device
+        - entity: input_datetime.select_time
+        - entity: input_select.schedule_state
+        - type: button
+          name: Schedule
+          entity: input_boolean.input_schedule
+          icon: 'mdi:fast-forward'

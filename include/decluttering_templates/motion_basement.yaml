@@ -1,0 +1,22 @@
+ motion_basement:
+  card:
+    type: 'custom:button-card'
+    entity: binary_sensor.basement_motion_sensor
+    name: Basement
+    style:
+      top: 20.35%
+      left: 80.05%
+      width: 20%
+    template:
+      - base_blank
+      - motion
+#    tap_action:
+#      action: fire-dom-event
+#      browser_mod:
+#        command: popup
+#        title: Basement Camera
+#        card:
+#          type: picture-entity
+#          entity: camera.basement
+#          show_name: false
+#          show_state: false

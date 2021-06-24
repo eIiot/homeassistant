@@ -1,0 +1,13 @@
+welcome_text:
+  card:
+    type: markdown
+    content: |
+      Good {{ states("input_text.tod") }}, {{user}}!
+    style: |
+      ha-card {
+        background-color: transparent;
+        font-size: 30px;
+        font-family: SF Display;
+        box-shadow: none;
+        margin-left: -10px;
+      }

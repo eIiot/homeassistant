@@ -1,0 +1,153 @@
+- id: '1605739872618'
+  alias: Argon40 Double Tap
+  description: ''
+  trigger:
+  - platform: event
+    event_type: argon40_event
+    event_data:
+      action: double-tap
+  condition: []
+  action:
+  - service: notify.mobile_app_eliot_s_phone
+    data:
+      message: The button was pressed
+  mode: single
+- id: '1618283678222'
+  alias: Webhook Translator
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ifttt_webhook_received
+  condition: []
+  action:
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.ifttt_webhook
+    data:
+      value: '{{trigger.data}}'
+  mode: single
+- id: '1618427063696'
+  alias: Zoom
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: ''
+  condition: []
+  action:
+  - service: logbook.log
+    data:
+      name: Zoom
+      message: Zoom worked
+  mode: single
+- id: '1618599432452'
+  alias: Notify New Release!
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: notify.mobile_app_in2025
+    data:
+      message: Welcome to the Version 1.1 update for Homeassistant! This update includes:<br>-
+        A new UI, with Material Design buttons!<br>- A Mail Integration, which allows
+        you to see what mail is being delivered!<br>- The map card has moved! It's
+        now avalible via the Sidebar<br>- Zoom Monitoring for Eliot and Zoe<br>- More
+        Switches + Devices<br>
+      title: New Homeassistant Update! Version 1.1
+      data:
+        priority: high
+  - service: notify.mobile_app_zoes_iphone
+    data:
+      message: 'Welcome to the Version 1.1 update for Homeassistant! This update includes:<br>
+
+        - A new UI, with Material Design buttons!<br>
+
+        - A Mail Integration, which allows you to see what mail is being delivered!<br>
+
+        - The map card has moved! It''s now avalible via the Sidebar<br>
+
+        - Zoom Monitoring for Eliot and Zoe<br>
+
+        - More Switches + Devices<br>
+
+        '
+      title: New Homeassistant Update! Version 1.1
+  - service: notify.mobile_app_th_iphone_6s
+    data:
+      message: 'Welcome to the Version 1.1 update for Homeassistant! This update includes:<br>
+
+        - A new UI, with Material Design buttons!<br>
+
+        - A Mail Integration, which allows you to see what mail is being delivered!<br>
+
+        - The map card has moved! It''s now avalible via the Sidebar<br>
+
+        - Zoom Monitoring for Eliot and Zoe<br>
+
+        - More Switches + Devices<br>
+
+        '
+      title: New Homeassistant Update! Version 1.1
+  - service: notify.mobile_app_hollys_iphone
+    data:
+      message: 'Welcome to the Version 1.1 update for Homeassistant! This update includes:<br>
+
+        - A new UI, with Material Design buttons!<br>
+
+        - A Mail Integration, which allows you to see what mail is being delivered!<br>
+
+        - The map card has moved! It''s now avalible via the Sidebar<br>
+
+        - Zoom Monitoring for Eliot and Zoe<br>
+
+        - More Switches + Devices<br>
+
+        '
+      title: New Homeassistant Update! Version 1.1
+  - service: notify.mobile_app_iphone_2
+    data:
+      message: 'Welcome to the Version 1.1 update for Homeassistant! This update includes:<br>
+
+        - A new UI, with Material Design buttons!<br>
+
+        - A Mail Integration, which allows you to see what mail is being delivered!<br>
+
+        - The map card has moved! It''s now avalible via the Sidebar<br>
+
+        - Zoom Monitoring for Eliot and Zoe<br>
+
+        - More Switches + Devices<br>
+
+        '
+      title: New Homeassistant Update! Version 1.1
+  mode: single
+- id: '1618599746632'
+  alias: Release Testing
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: notify.mobile_app_in2025
+    data:
+      message: Welcome to the Version 1.1 update for Homeassistant! This update includes:<br>-
+        A new UI, with Material Design buttons!<br>- A Mail Integration, which allows
+        you to see what mail is being delivered!<br>- The map card has moved! It's
+        now avalible via the Sidebar<br>- Zoom Monitoring for Eliot and Zoe<br>- More
+        Switches + Devices<br>- Wyze Cameras in Homeassistant [COMING SOON]<br>- Motion
+        Detecton for Deck Lights [COMING SOON]<br>- Control ALL the lights using Smart
+        Switches! [COMING SOON]<br>If you have any questions regarding this update,
+        pelase contact Eliot
+      title: New Homeassistant Update! Version 1.1
+      data:
+        priority: high
+  mode: single
+- id: '1618701502235'
+  alias: Update USPS Mail Camera Path on Hass Restart
+  trigger:
+  - platform: state
+    entity_id: sensor.mail_usps_mail
+  action:
+  - service: local_file.update_file_path
+    data_template:
+      entity_id: camera.mail_usps
+      file_path: '{{ states(''sensor.mail_image_system_path'') }}'
+  mode: single
