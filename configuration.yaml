@@ -1,0 +1,420 @@
+homeassistant:
+  name: Home
+  latitude: !secret lat
+  longitude: !secret long
+  elevation: !secret elev
+  unit_system: imperial
+  time_zone: !secret timezone
+  external_url: !secret url
+  internal_url: http://192.168.7.246:8123
+  legacy_templates: false
+  customize: !include /config/include/customize.yaml
+
+frontend:
+  themes: !include_dir_merge_named /config/include/themes
+  extra_module_url:
+    - /hacsfiles/custom-sidebar/custom-sidebar.js
+
+config:
+
+http:
+  cors_allowed_origins:
+    - https://cast.home-assistant.io
+  # ssl_certificate: /ssl/fullchain.pem
+  # ssl_key: /ssl/privkey.pem
+  
+
+browser_mod:
+
+system_health:
+
+websocket_api:
+
+shell_command: !include /config/include/shell_commands.yaml
+
+updater:
+
+binary_sensor:
+  - platform: template
+    sensors:
+      fr24_feeder_receiver_connected:
+        friendly_name: Receiver Connected
+        value_template: '{{ is_state_attr("sensor.fr24_feeder", "rx_connected", "1") }}'
+        device_class: connectivity
+      fr24_feeder_link_connected:
+        friendly_name: Link Connected
+        value_template: '{{ is_state_attr("sensor.fr24_feeder", "feed_status", "connected") }}'
+        device_class: connectivity
+      keypad_trigger:
+        friendly_name: Keypad Trigger
+        value_template: '{{ is_state("input_boolean.keypad_trigger", "on") }}'
+  - platform: ping
+    host: 192.168.7.214
+    name: "Android Server"
+    count: 2
+    scan_interval: 30
+  - platform: ping
+    host: 192.168.7.217
+    name: "Pi24"
+    count: 2
+    scan_interval: 30
+    
+
+cloud:
+
+climate:
+  - platform: generic_thermostat
+    name: Bedroom
+    target_sensor: sensor.bedroom_temperature
+    heater: switch.veryfake111
+  - platform: generic_thermostat
+    name: Living Room
+    target_sensor: sensor.living_room_temperature
+    heater: switch.veryfake111
+  - platform: generic_thermostat
+    name: Upstairs
+    target_sensor: sensor.upstairs_temperature
+    heater: switch.veryfake111
+  - platform: generic_thermostat
+    name: Basement
+    target_sensor: sensor.basement_temperature
+    heater: switch.veryfake111
+  - platform: generic_thermostat
+    name: Outside
+    target_sensor: sensor.outdoor_temperature
+    heater: switch.veryfake111
+
+ios:
+  push:
+    categories:
+      - name: Alarm Arm Failure
+        identifier: alarmo_arm_failure
+        actions:
+          - identifier: ALARMO_RETRY_ARM
+            title: Retry Arm # feel free to change this text
+            destructive: true
+          - identifier: ALARMO_FORCE_ARM
+            title: Force Arm # feel free to change this text
+            destructive: true
+
+scene: !include scenes.yaml
+
+input_text:
+
+my:
+
+light:
+
+recorder:
+  purge_keep_days: 7
+
+switch:
+  - platform: template
+    switches:
+      bedroom_lamps:
+        friendly_name: Bedroom Lamps
+        value_template: "{{ is_state('switch.bedroom_lamp_left', 'on') }}"
+        turn_on:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.bedroom_lamp_left
+          - service: switch.turn_on
+            target:
+              entity_id: switch.bedroom_lamp_right
+        turn_off:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.bedroom_lamp_left
+          - service: switch.turn_off
+            target:
+              entity_id: switch.bedroom_lamp_right
+      deck_cameras:
+        friendly_name: Deck Cameras
+        value_template: "{{ is_state('switch.deck_camera', 'on') }}"
+        turn_on:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.deck_camera
+          - service: switch.turn_on
+            target:
+              entity_id: switch.below_deck_camera
+        turn_off:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.deck_camera
+          - service: switch.turn_off
+            target:
+              entity_id: switch.below_deck_camera            
+      bedroom_fans:
+        friendly_name: Bedroom Fans
+        value_template: "{{ is_state('switch.bedroom_fan', 'on') }}"
+        turn_on:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.bedroom_fan
+          - service: switch.turn_on
+            target:
+              entity_id: switch.desk_fan
+        turn_off:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.bedroom_fan
+          - service: switch.turn_off
+            target:
+              entity_id: switch.desk_fan                  
+
+stream:
+
+discovery:
+
+logger:
+  default: info
+  logs:
+    custom_components.zoom: debug
+
+history:
+
+logbook:
+
+sun:
+
+automation: !include automations.yaml
+
+input_number:
+
+input_datetime:
+
+input_select:
+  schedule_device:
+    name: Device
+    options:
+      - Basement Lamp
+      - Bedroom LED Strip
+      - Bedroom Lamps
+      - Bedroom Fans
+      - Bookcase Lights
+      - Deck Lights
+      - Fireplace Lamp
+      - Kettle
+      - Zoe's Desk Lamp
+      - Zoe's Bedside Lamp
+
+counter:
+
+timer:
+
+sensor:
+  - platform: uptime
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+      - type: memory_use_percent
+      - type: swap_use_percent
+      - type: processor_temperature
+      - type: processor_use
+      - type: throughput_network_in
+        arg: wlan0
+      - type: throughput_network_out
+        arg: wlan0
+      - type: network_in
+        arg: wlan0
+      - type: network_out
+        arg: wlan0
+      - type: packets_in
+        arg: wlan0
+      - type: packets_out
+        arg: wlan0
+      - type: last_boot
+  - platform: template
+    sensors: !include /config/include/templates.yaml
+  - platform: openhardwaremonitor
+    host: 192.168.7.211
+  - platform: rest
+    name: FR24 Feeder
+    resource: http://192.168.7.217:8754/monitor.json
+    value_template: "{{ value_json.feed_alias }}"
+    method: GET
+    scan_interval: 60
+    json_attributes:
+      - rx_connected
+      - feed_status
+      - d11_map_size
+      - feed_num_ac_tracked
+      - build_version
+      - feed_alias
+  - platform: google_fit
+    name: Google Fit
+    client_id: !secret fit_cid
+    client_secret: !secret fit_secret
+  - platform: authenticated
+  - platform: websocket_api
+  - platform: google_travel_time
+    name: Holly's Time from Home
+    api_key: !secret google_api
+    origin: person.holly
+    destination: zone.home
+    scan_interval: 604800
+  - platform: google_travel_time
+    name: Tom's Time from Home
+    api_key: !secret google_api
+    origin: person.tom
+    destination: zone.home
+    scan_interval: 604800
+  - platform: openhardwaremonitor
+    host: 192.168.7.211
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+
+input_boolean:
+
+tts:
+  platform: google_translate
+
+group: !include /config/include/groups.yaml
+
+notify:
+  - platform: html5
+    name: Home Assistant
+    vapid_pub_key: !secret html5_priv_key
+    vapid_prv_key: !secret html5_pub_key
+    vapid_email: html5_email
+
+lovelace:
+  resources:
+    - url: /hacsfiles/bar-card/bar-card.js
+      type: module
+    - url: /hacsfiles/button-card/button-card.js
+      type: module
+    - url: /hacsfiles/circle-sensor-card/circle-sensor-card.js
+      type: module
+    - url: /hacsfiles/custom-sidebar/custom-sidebar.js
+      type: module
+    - url: /hacsfiles/decluttering-card/decluttering-card.js
+      type: module
+    - url: /hacsfiles/Homekit-panel-card/homekit-panel-card.js
+      type: module
+    - url: /hacsfiles/kiosk-mode/kiosk-mode.js
+      type: module
+    - url: /hacsfiles/light-entity-card/light-entity-card.js
+      type: module
+    - url: /hacsfiles/light-popup-card/light-popup-card.js
+      type: module
+    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+      type: module
+    - url: /hacsfiles/lovelace-card-tools/card-tools.js
+      type: module
+    - url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
+      type: module
+    - url: /hacsfiles/lovelace-gap-card/gap-card.js
+      type: module
+    - url: /hacsfiles/lovelace-hui-element/hui-element.js
+      type: module
+    - url: /hacsfiles/lovelace-layout-card/layout-card.js
+      type: module
+    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+      type: module
+    - url: /hacsfiles/lovelace-paper-buttons-row/paper-buttons-row.js
+      type: module
+    - url: /hacsfiles/lovelace-slider-entity-row/lovelace-slider-entity-row.js
+      type: module
+    - url: /hacsfiles/lovelace-state-switch/state-switch.js
+      type: module
+    - url: /hacsfiles/lovelace-valetudo-map-card/lovelace-valetudo-map-card.js
+      type: module
+    - url: /hacsfiles/media_player-popup-card/media_player-popup-card.js
+      type: module
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/refreshable-picture-card/refreshable-picture-card.js
+      type: module
+    - url: /hacsfiles/roku-card/roku-card.js
+      type: module
+    - url: /hacsfiles/state-element/state-element.js
+      type: module
+    - url: /hacsfiles/swipe-card/swipe-card.js
+      type: module
+    - url: /hacsfiles/thermostat-popup-card/thermostat-popup-card.js
+      type: module
+    - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
+      type: module
+    - url: /hacsfiles/vertical-style-card/vertical-style-card.js
+      type: module
+    - url: /hacsfiles/weather-card/weather-card.js
+      type: module
+    - url: /hacsfiles/uptime-card/uptime-card.js
+      type: module
+    - url: /local/font.css
+      type: css
+  dashboards:
+    lovelace-testing:
+      mode: yaml
+      title: Testing
+      show_in_sidebar: false
+      filename: testing_dashboard.yaml
+      require_admin: true
+  mode: yaml
+
+spotify:
+  client_id: !secret spotify_cid
+  client_secret: !secret spotify_secret
+
+script: !include scripts.yaml
+
+device_tracker:
+  - platform: whistle
+    username: !secret whistle_username
+    password: !secret whistle_password
+    monitored_variables:
+      - WHISTLE
+  - platform: iphonedetect
+    consider_home: 60
+    scan_interval: 12
+    new_device_defaults:
+      track_new_devices: true
+    hosts:
+      Holly iPhone Home: 192.168.7.227
+
+zoom:
+  - client_id: !secret zoom_eliot_cid
+    client_secret: !secret zoom_eliot_secret
+    verification_token: !secret zoom_eliot_token
+    name: Eliot
+  - client_id: !secret zoom_zoe_cid
+    client_secret: !secret zoom_zoe_secret
+    verification_token: !secret zoom_zoe_token
+    name: Zoe
+  - client_id: !secret zoom_eliot_school_cid
+    client_secret: !secret zoom_eliot_school_secret
+    verification_token: !secret zoom_eliot_school_token
+    name: Eliot's School Account
+
+panel_iframe:
+  adguard:
+    url: !secret adguard_embed
+    require_admin: true
+    icon: 'si:adguard'
+    title: 'Adguard'    
+  esp:
+    url: !secret esp_embed
+    require_admin: true
+    icon: 'si:esphome'
+    title: 'EspHome'    
+  filebrowser:
+    url: !secret filebrowser_embed
+    require_admin: true
+    icon: 'mdi:folder'
+    title: 'Filebrowser'       
+
+tplink:
+  switch:
+    - host: 192.168.7.223
